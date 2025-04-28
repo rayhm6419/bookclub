@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.validation.Valid;
-import java.util.List;
 
 @Controller
 @RequestMapping("/wishlist")
@@ -25,11 +24,7 @@ public class WishlistController {
     }
 
     @RequestMapping(method = RequestMethod.GET)
-    public String showWishlist(Model model) {
-        List<WishlistItem> wishlist = wishlistDao.list();
-
-        model.addAttribute("wishlist", wishlist);
-
+    public String showWishlist() {
         return "wishlist/list";
     }
 
@@ -47,7 +42,7 @@ public class WishlistController {
             return "wishlist/new";
         }
 
-        wishlistDao.add(wishlistItem); // add the record to MongoDB
+        wishlistDao.add(wishlistItem); 
 
         return "redirect:/wishlist";
     }
